@@ -49,8 +49,8 @@ var renderItem = function(item, itemId, itemTemplate, itemDataAttr) {
     element.find('.js-shopping-item').text(item.displayName);
     if (item.checkedOff) {
         element.find('.js-shopping-item').addClass('shopping-item_checked');
-    };
-    element.find('.js-shopping-item-toggle')
+    }
+    element.find('.js-shopping-item-toggle');
     element.attr(itemDataAttr, itemId);
     return element;
 };
@@ -75,7 +75,7 @@ formElement, newItemIdentifier, itemDataAttr, listElement, state) {
         renderList(state, listElement, itemDataAttr);
         this.reset();
     });
-};
+}
 
 //check or uncheck items by hitting check button
 function itemToggles(
@@ -87,9 +87,9 @@ listElement, toggleIdentifier, itemDataAttr, state) {
         updateItem(state, itemId, {
             displayName: oldItem.displayName,
             checkedOff: !oldItem.checkedOff });
-        renderList(state, listElement, itemDataAttr)
+        renderList(state, listElement, itemDataAttr);
     });
-};
+}
 
 //delete items by hitting delete button
 function itemDeletes(
@@ -99,7 +99,7 @@ formElement, removeIdentifier, itemDataAttr, listElement, state) {
         deleteItem(state, itemIndex);
         renderList(sate, listElement, itemDataAttr);
     });
-};
+}
 
 
 
@@ -109,7 +109,7 @@ $(function() {
     var newItemIdentifier = '#js-new-item';
     var removeIdentifier = '.js-shopping-item-delete';
     var itemDataAttr = 'data-list-item-id';
-    var toggleIdentifier = '.js-shopping-item-toggle'
+    var toggleIdentifier = '.js-shopping-item-toggle';
     
     itemAdds(formElement, newItemIdentifier, itemDataAttr, listElement, state);
     handleItemDeletes(formElement, removeIdentifier, itemDataAttr, listElement, state);
