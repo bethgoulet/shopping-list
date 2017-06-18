@@ -46,7 +46,7 @@ $('.shopping-list').on('click', '.shopping-item-toggle', function(event){
 
 //delete items by hitting delete button
 $('.shopping-list').on('click', 'shopping-item-delete', function(event){
-   var deletedItem = $(this).closest('.shopping-item');
-   deletedItem.remove();
+   var deletedItem = parseInt($(this).closest('.shopping-item'));
+   state.items.splice(deletedItem, 1);
    renderList(state, $('.shopping-list'));
 });
