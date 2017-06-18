@@ -27,7 +27,7 @@ var itemTemplate = (
 var addItem = function(state, item) {
     state.items.push({
         displayName: item,
-        checkOff: false
+        checkedOff: false
     });
 };
 
