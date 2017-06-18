@@ -41,10 +41,12 @@ $('#js-shopping-list-form').submit(function(event) {
 $('.shopping-list').on('click', '.shopping-item-toggle', function(event){
    var checkedItem = $(this).closest('.shopping-item');
    checkedItem.toggleClass('shopping-item__checked');
+   renderList(state, $('.shopping-list'));
 });
 
 //delete items by hitting delete button
 $('.shopping-list').on('click', 'shopping-item-delete', function(event){
    var deletedItem = $(this).closest('.shopping-item');
    deletedItem.remove();
+   renderList(state, $('.shopping-list'));
 });
