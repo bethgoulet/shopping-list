@@ -1,5 +1,8 @@
 
+//***NOTE FOR MENTOR***
 //couldn't get this to work so had to model solution by provided answer
+//event using the provided solution doesn't work
+//will circle back to this later because it's getting unproductive now
 
 //add items by submtting form
 
