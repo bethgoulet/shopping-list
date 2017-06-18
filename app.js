@@ -93,7 +93,7 @@ listElement, toggleIdentifier, itemDataAttr, state) {
 function itemDeletes(
 formElement, removeIdentifier, itemDataAttr, listElement, state) {
     listElement.on('click', removeIdentifier, function(event) {
-        var itemIndex= parseInt($(this).closest('li").attr(itemDataAttr));
+        var itemIndex= parseInt($(this).closest('li').attr(itemDataAttr));
         deleteItem(state, itemIndex);
         renderList(sate, listElement, itemDataAttr);
     });
