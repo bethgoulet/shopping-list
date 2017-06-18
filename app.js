@@ -11,6 +11,12 @@ var addItem = function(state, item) {
     state.items.push(item);
 };
 
+var deleteItem = function(state, itemIndex) {
+    state.items.splice(itemIndex, 1);
+};    
+
+var toggleItem =
+
 // Render functions
 var renderList = function(state, element) {
     var itemsHTML = state.items.map(function(item) {
