@@ -37,7 +37,7 @@ $('#js-shopping-list-form').submit(function(event) {
 });
 
 //check or uncheck items by hitting check button
-$('.shopping-item-toggle').click(function(event){
+$('.shopping-list').on('click', '.shopping-item-toggle', function(event){
    var checkedItem = $(this).closest('.shopping-item');
    checkedItem.toggleClass('shopping-item__checked');
 });
