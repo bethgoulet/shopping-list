@@ -8,17 +8,19 @@ var state = {
     items: []
 };
 
-var itemTemplate = ('<li> \
-        <span class="shopping-item">' + item + '</span> \
-        <div class="shopping-item-controls"> \
-          <button class="shopping-item-toggle"> \
-            <span class="button-label">check</span> \
-          </button> \
-          <button class="shopping-item-delete"> \
-            <span class="button-label">delete</span> \
-          </button> \
-        </div> \
-      </li>');
+var itemTemplate = (
+  '<li>' +
+    '<span class="shopping-item js-shopping-item"></span>' +
+    '<div class="shopping-item-controls">' +
+      '<button class="js-shopping-item-toggle">' +
+        '<span class="button-label">check</span>' +
+      '</button>' +
+      '<button class="js-shopping-item-delete">' +
+        '<span class="button-label">delete</span>' +
+      '</button>' +
+    '</div>' +
+  '</li>'
+);
 
 
 // State modification functions
@@ -35,11 +37,11 @@ var deleteItem = function(state, itemIndex) {
 
 var getItem = function(state, itemIndex) {
     return state.items[itemIndex];
-}
+};
 
 var updateItem = function(state, itemIndex, newItemState) {
     state.items[itemIndex] = newItemSate;
-}
+};
 
 // Render functions
 var renderItem = function(item, itemId, itemTemplate, itemDataAttr) {
@@ -47,7 +49,7 @@ var renderItem = function(item, itemId, itemTemplate, itemDataAttr) {
     element.find('.js-shopping-item').text(item.displayName);
     if (item.checkedOff) {
         element.find('.js-shopping-item').addClass('shopping-item_checked');
-    }
+    };
     element.find('.js-shopping-item-toggle')
     element.attr(itemDataAttr, itemId);
     return element;
@@ -59,7 +61,7 @@ var renderList = function(state, listElement, itemDataAttr) {
             return renderItem(item, index, itemTemplate, itemDataAttr);
         });
      listElement.html(itemsHtml);  
-}
+};
 
 // Event listeners
 
@@ -73,7 +75,7 @@ formElement, newItemIdentifier, itemDataAttr, listElement, state) {
         renderList(state, listElement, itemDataAttr);
         this.reset();
     });
-}
+};
 
 //check or uncheck items by hitting check button
 function itemToggles(
@@ -87,7 +89,7 @@ listElement, toggleIdentifier, itemDataAttr, state) {
             checkedOff: !oldItem.checkedOff });
         renderList(state, listElement, itemDataAttr)
     });
-}
+};
 
 //delete items by hitting delete button
 function itemDeletes(
@@ -97,7 +99,7 @@ formElement, removeIdentifier, itemDataAttr, listElement, state) {
         deleteItem(state, itemIndex);
         renderList(sate, listElement, itemDataAttr);
     });
-}
+};
 
 
 
