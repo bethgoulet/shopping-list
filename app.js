@@ -34,6 +34,7 @@ $('#js-shopping-list-form').submit(function(event) {
     event.preventDefault();
     addItem(state, $('#shopping-list-entry').val());
     renderList(state, $('.shopping-list'));
+    this.reset();
 });
 
 //check or uncheck items by hitting check button
