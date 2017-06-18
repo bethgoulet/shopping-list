@@ -87,7 +87,8 @@ listElement, toggleIdentifier, itemDataAttr, state) {
         
         updateItem(state, itemId, {
             displayName: oldItem.displayName,
-            checkedOff: !oldItem.checkedOff });
+            checkedOff: !oldItem.checkedOff 
+        });
         renderList(state, listElement, itemDataAttr);
     });
 }
@@ -99,7 +100,7 @@ formElement, removeIdentifier, itemDataAttr, listElement, state) {
         var itemIndex= parseInt($(this).closest('li').attr(itemDataAttr));
         deleteItem(state, itemIndex);
         renderList(state, listElement, itemDataAttr);
-    });
+    })
 }
 
 
