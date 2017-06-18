@@ -8,7 +8,7 @@ var state = {
     items: []
 };
 
-var itemTemplate = (
+var listItemTemplate = (
   '<li>' +
     '<span class="shopping-item js-shopping-item"></span>' +
     '<div class="shopping-item-controls">' +
@@ -23,45 +23,46 @@ var itemTemplate = (
 );
 
 
+
 // State modification functions
-var addItem = function(state, item) {
+function addItem(state, item) {
     state.items.push({
         displayName: item,
         checkedOff: false
     });
-};
+}
 
-var deleteItem = function(state, itemIndex) {
+function deleteItem(state, itemIndex) {
     state.items.splice(itemIndex, 1);
-};    
+}   
 
-var getItem = function(state, itemIndex) {
+function getItem(state, itemIndex) {
     return state.items[itemIndex];
-};
+}
 
-var updateItem = function(state, itemIndex, newItemState) {
+function updateItem(state, itemIndex, newItemState) {
     state.items[itemIndex] = newItemState;
-};
+}
 
 // Render functions
-var renderItem = function(item, itemId, itemTemplate, itemDataAttr) {
-    var itemsHTML = $(itemTemplate);
-    itemsHTML.find('.js-shopping-item').text(item.displayName);
+function renderItem(item, itemId, itemTemplate, itemDataAttr) {
+    var element = $(itemTemplate);
+    element.find('.js-shopping-item').text(item.displayName);
     if (item.checkedOff) {
-        itemsHTML.find('.js-shopping-item').addClass('shopping-item_checked');
+        element.find('.js-shopping-item').addClass('shopping-item_checked');
     }
-    itemsHTML.find('.js-shopping-item-toggle')
-    itemsHTML.attr(itemDataAttr, itemId);
-    return itemsHTML;
-};
+    element.find('.js-shopping-item-toggle')
+    element.attr(itemDataAttr, itemId);
+    return element;
+}
 
-var renderList = function(state, listElement, itemDataAttr) {
-    var itemsHtml = state.items.map(
+function renderList(state, listElement, itemDataAttr) {
+    var itemsHTML = state.items.map(
         function(item, index) {
-            return renderItem(item, index, itemTemplate, itemDataAttr);
+            return renderItem(item, index, listItemTemplate, itemDataAttr);
         });
-     listElement.html(itemsHtml);  
-};
+     listElement.html(itemsHTML);  
+}
 
 // Event listeners
 
