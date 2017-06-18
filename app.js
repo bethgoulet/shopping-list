@@ -40,7 +40,7 @@ var getItem = function(state, itemIndex) {
 };
 
 var updateItem = function(state, itemIndex, newItemState) {
-    state.items[itemIndex] = newItemSate;
+    state.items[itemIndex] = newItemState;
 };
 
 // Render functions
@@ -97,7 +97,7 @@ formElement, removeIdentifier, itemDataAttr, listElement, state) {
     listElement.on('click', removeIdentifier, function(event) {
         var itemIndex= parseInt($(this).closest('li').attr(itemDataAttr));
         deleteItem(state, itemIndex);
-        renderList(sate, listElement, itemDataAttr);
+        renderList(state, listElement, itemDataAttr);
     });
 }
 
