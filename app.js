@@ -50,7 +50,7 @@ var renderItem = function(item, itemId, itemTemplate, itemDataAttr) {
     if (item.checkedOff) {
         itemsHTML.find('.js-shopping-item').addClass('shopping-item_checked');
     }
-    itemsHTML.find('.js-shopping-item-toggle');
+    itemsHTML.find('.js-shopping-item-toggle')
     itemsHTML.attr(itemDataAttr, itemId);
     return itemsHTML;
 };
