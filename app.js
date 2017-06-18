@@ -112,6 +112,6 @@ $(function() {
     var toggleIdentifier = '.js-shopping-item-toggle';
     
     itemAdds(formElement, newItemIdentifier, itemDataAttr, listElement, state);
-    handleItemDeletes(formElement, removeIdentifier, itemDataAttr, listElement, state);
-    handleItemToggles(listElement, toggleIdentifier, itemDataAttr, state);
+    itemDeletes(formElement, removeIdentifier, itemDataAttr, listElement, state);
+    itemToggles(listElement, toggleIdentifier, itemDataAttr, state);
 });
