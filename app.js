@@ -5,8 +5,9 @@
 
 // Single state object
 var state = {
-    items: []
+  items: []
 };
+
 
 var listItemTemplate = (
   '<li>' +
@@ -26,94 +27,97 @@ var listItemTemplate = (
 
 // State modification functions
 function addItem(state, item) {
-    state.items.push({
-        displayName: item,
-        checkedOff: false
-    });
+  state.items.push({
+    displayName: item,
+    checkedOff: false
+  });
+}
+
+function getItem(state, itemIndex) {
+  return state.items[itemIndex];
 }
 
 function deleteItem(state, itemIndex) {
-    state.items.splice(itemIndex, 1);
-}   
-
-function getItem(state, itemIndex) {
-    return state.items[itemIndex];
+  state.items.splice(itemIndex, 1);
 }
 
 function updateItem(state, itemIndex, newItemState) {
-    state.items[itemIndex] = newItemState;
+  state.items[itemIndex] = newItemState;
 }
 
 // Render functions
 function renderItem(item, itemId, itemTemplate, itemDataAttr) {
-    var element = $(itemTemplate);
-    element.find('.js-shopping-item').text(item.displayName);
-    if (item.checkedOff) {
-        element.find('.js-shopping-item').addClass('shopping-item_checked');
-    }
-    element.find('.js-shopping-item-toggle')
-    element.attr(itemDataAttr, itemId);
-    return element;
+  var element = $(itemTemplate);
+  element.find('.js-shopping-item').text(item.displayName);
+  if (item.checkedOff) {
+    element.find('.js-shopping-item').addClass('shopping-item__checked');
+  }
+  element.find('.js-shopping-item-toggle')
+  element.attr(itemDataAttr, itemId);
+  return element;
 }
 
 function renderList(state, listElement, itemDataAttr) {
-    var itemsHTML = state.items.map(
-        function(item, index) {
-            return renderItem(item, index, listItemTemplate, itemDataAttr);
-        });
-     listElement.html(itemsHTML);  
+  var itemsHTML = state.items.map(
+    function(item, index) {
+      return renderItem(item, index, listItemTemplate, itemDataAttr);
+  });
+  listElement.html(itemsHTML);
 }
 
 // Event listeners
 
-//add items
-function itemAdds (
-formElement, newItemIdentifier, itemDataAttr, listElement, state) {
-    formElement.submit(function(event) {
-        event.preventDefault();
-        var newItem = formElement.find(newItemIdentifier).val();
-        addItem(state, newItem);
-        renderList(state, listElement, itemDataAttr);
-        this.reset();
+function handleItemAdds(
+  formElement, newItemIdentifier, itemDataAttr, listElement, state) {
+
+  formElement.submit(function(event) {
+    event.preventDefault();
+    var newItem = formElement.find(newItemIdentifier).val();
+    addItem(state, newItem);
+    renderList(state, listElement, itemDataAttr);
+    this.reset();
+  });
+}
+
+function handleItemDeletes(
+  formElement, removeIdentifier, itemDataAttr, listElement, state) {
+
+  listElement.on('click', removeIdentifier, function(event) {
+    var itemIndex = parseInt($(this).closest('li').attr(itemDataAttr));
+    deleteItem(state, itemIndex);
+    renderList(state, listElement, itemDataAttr);
+  })
+}
+
+
+function handleItemToggles(
+  listElement, toggleIdentifier, itemDataAttr, state) {
+
+  listElement.on('click', toggleIdentifier, function(event) {
+    var itemId = $(event.currentTarget.closest('li')).attr(itemDataAttr);
+    var oldItem = getItem(state, itemId);
+
+    updateItem(state, itemId, {
+      displayName: oldItem.displayName,
+      checkedOff: !oldItem.checkedOff
     });
+    renderList(state, listElement, itemDataAttr)
+  });
 }
-
-//check or uncheck items by hitting check button
-function itemToggles(
-listElement, toggleIdentifier, itemDataAttr, state) {
-    listElement.on('click', toggleIdentifier, function(event) {
-        var itemId = $(event.currentTarget.closest('li')).attr(itemDataAttr);
-        var oldItem = getItem(state, itemId);
-        
-        updateItem(state, itemId, {
-            displayName: oldItem.displayName,
-            checkedOff: !oldItem.checkedOff 
-        });
-        renderList(state, listElement, itemDataAttr);
-    });
-}
-
-//delete items by hitting delete button
-function itemDeletes(
-formElement, removeIdentifier, itemDataAttr, listElement, state) {
-    listElement.on('click', removeIdentifier, function(event) {
-        var itemIndex= parseInt($(this).closest('li').attr(itemDataAttr));
-        deleteItem(state, itemIndex);
-        renderList(state, listElement, itemDataAttr);
-    })
-}
-
 
 
 $(function() {
-    var formElement = $('#js-shopping-list-form');
-    var listElement = $('.js-shopping-list');
-    var newItemIdentifier = '#js-new-item';
-    var removeIdentifier = '.js-shopping-item-delete';
-    var itemDataAttr = 'data-list-item-id';
-    var toggleIdentifier = '.js-shopping-item-toggle';
-    
-    itemAdds(formElement, newItemIdentifier, itemDataAttr, listElement, state);
-    itemDeletes(formElement, removeIdentifier, itemDataAttr, listElement, state);
-    itemToggles(listElement, toggleIdentifier, itemDataAttr, state);
+  var formElement = $('#js-shopping-list-form');
+  var listElement = $('.js-shopping-list');
+  var newItemIdentifier = '#js-new-item';
+  var removeIdentifier = '.js-shopping-item-delete';
+  var itemDataAttr = 'data-list-item-id';
+  var toggleIdentifier = '.js-shopping-item-toggle';
+
+  handleItemAdds(
+    formElement, newItemIdentifier, itemDataAttr, listElement, state);
+  handleItemDeletes(
+    formElement, removeIdentifier, itemDataAttr, listElement, state);
+  handleItemToggles(listElement, toggleIdentifier, itemDataAttr, state);
 });
+
