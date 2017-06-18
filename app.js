@@ -46,13 +46,13 @@ var updateItem = function(state, itemIndex, newItemState) {
 // Render functions
 var renderItem = function(item, itemId, itemTemplate, itemDataAttr) {
     var itemsHTML = $(itemTemplate);
-    element.find('.js-shopping-item').text(item.displayName);
+    itemsHTML.find('.js-shopping-item').text(item.displayName);
     if (item.checkedOff) {
-        element.find('.js-shopping-item').addClass('shopping-item_checked');
+        itemsHTML.find('.js-shopping-item').addClass('shopping-item_checked');
     }
-    element.find('.js-shopping-item-toggle');
-    element.attr(itemDataAttr, itemId);
-    return element;
+    itemsHTML.find('.js-shopping-item-toggle');
+    itemsHTML.attr(itemDataAttr, itemId);
+    return itemsHTML;
 };
 
 var renderList = function(state, listElement, itemDataAttr) {
